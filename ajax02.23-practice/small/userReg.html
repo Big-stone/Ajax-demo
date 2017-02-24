@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    用户名:<input type="text" id="username"  placeholder="请输入正确的用户名">
+    <input type="button" value="检测用户名是否存在">
+    <div></div>
+<script>
+	var inputs = document.querySelector('input[type=button]');
+
+		inputs.onclick=function(){ 
+
+			var xhr = new XMLHttpRequest();
+			var username = document.getElementById('username').value;
+				//打开请求
+				xhr.open('POST','userReg.php');
+				//设置请求头
+				xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+				//发送请求
+				xhr.send('username='+username);
+				//准备改变状态
+				xhr.onreadystatechange=function(){
+					if(xhr.readyState==4 && xhr.status==200 ) {
+
+						var data = xhr.responseText;
+
+						document.querySelector('div').innerHTML=data;
+					}
+				}
+		 }
+
+</script>
+</body>
+</html>
