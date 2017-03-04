@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    	<input type="button" value="点击获取用户">
+    	<div class="box"></div>
+    </body>
+    <script>
+
+    	document.querySelector("input[type=button]").onclick = function ( ) {
+
+    		var xhr  = new XMLHttpRequest();
+
+    			xhr.open("POST","01userlist.php");
+
+    			xhr.setRequestHeader("Content-Type","application/x-www-form-urlencode");
+
+    			xhr.send(null);
+
+    			xhr.onreadystatechange = function ( ){
+
+    				if( xhr.readyState == 4 && xhr.status == 200 ) {
+
+    					var data  = xhr.responseText;
+
+    					// alert(data);
+    					var arr = data.split( ',' );
+
+    					var div = '';
+
+    					for( var i = 0; i < arr.length; i++ ) {
+
+    						div += arr[ i ];
+    					}
+
+    					document.querySelector('.box').innerHTML = div;
+
+    				}
+
+    			}
+
+    	}
+
+
+
+
+    	// document.querySelector('input[type=button]').onclick = function ( ) {
+
+    	// 		var xhr = new XMLHttpRequest();
+
+    	// 		xhr.open("POST","01userlist.php");
+
+    	// 		xhr.setRequestHeader("Content-Type","application/x-www-form-urlencode");
+
+    	// 		xhr.send(null);
+
+    	// 		xhr.onreadystatechange = function () {
+
+    	// 				if( xhr.readyState == 4 && xhr.status == 200 ) {
+
+    	// 					var data = xhr.responseText;
+
+    	// 					var arr = data.split( ',' );
+
+    	// 					var div = "";
+
+    	// 					for( var i = 0; i < arr.length; i++ ) {
+
+    	// 						div+="<div>"+arr[i]+"</div>"
+    	// 					}
+
+    	// 					document.querySelector(".box").innerHTML = div;
+
+    	// 				}
+
+    	// 		}
+
+
+    	// }
+
+
+    </script>
+</html>

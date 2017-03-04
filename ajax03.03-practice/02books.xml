@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<books>
+	<book>
+		<bookName>斗破苍穹</bookName>
+		<author>斗破</author>
+		<price>9.9</price>
+		<press>xxx出版社</press>
+	</book>
+
+	<book>
+		<bookName>斗破苍穹2</bookName>
+		<author>斗破</author>
+		<price>9.9</price>
+		<press>xxx出版社</press>
+	</book>
+
+	<book>
+		<bookName>斗破苍穹3</bookName>
+		<author>斗破</author>
+		<price>9.9</price>
+		<press>xxx出版社</press>
+	</book>
+
+	<book>
+		<bookName>斗破苍穹4</bookName>
+		<author>斗破</author>
+		<price>9.9</price>
+		<press>xxx出版社</press>
+	</book>
+</books>

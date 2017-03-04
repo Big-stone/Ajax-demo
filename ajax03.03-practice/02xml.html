@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    <style>
+        table {
+            width: 600px;
+            border-collapse: collapse;
+        }
+        td {
+            height: 40px;
+            text-align: center;
+            border: 1px solid #CCC;
+        }
+    </style>
+    </head>
+    <body>
+    	<input type="button" value="查询书籍">
+
+    	<table>
+    		<tr>
+    			<td>书名</td>
+    			<td>作者</td>
+    			<td>价格</td>
+    			<td>出版社</td>
+    		</tr>
+    	</table>
+    </body>
+    <script>
+
+    /**
+     *1.获取inpiut标签
+     *2.注册点击事件
+     *3.创建请求
+     *4.判断请求状态
+     *5.获取xml文件
+     *6.遍历获取到的xml文件
+     *7.动态创建tr与td
+     *8.将books中每一项放入td中
+     *8.将td插入tr，将tr插入table中
+     */
+
+     document.querySelector('input').onclick = function ( ) {
+
+     		var xhr = new XMLHttpRequest();
+     			xhr.open('POST',"02xml.php");
+     			xhr.setRequestHeader("Content-Type","application/x-www-form-urlencode");
+     			xhr.send(null);
+     			xhr.onreadystatechange = function ( ) {
+     				if( xhr.readyState == 4 && xhr.status == 200 ) {
+     					var data = xhr.responseXML;
+
+     					console.log(data);
+     					var books = data.getElementsByTagName("book");
+
+     					console.log(books);
+     					for( var i = 0; i < books.length; i++ ) {
+
+     						 var tr = document.createElement('tr');
+     						 var td1 = document.createElement('td');
+     						 var td2 = document.createElement('td');
+     						 var td3 = document.createElement('td');
+     						 var td4 = document.createElement('td');
+
+     						 td1.innerHTML = books[ i ].getElementsByTagName("bookName")[ 0 ].innerHTML;
+     						 td2.innerHTML = books[ i ].getElementsByTagName("author")[ 0 ].innerHTML;
+     						 td3.innerHTML = books[ i ].getElementsByTagName("price")[ 0 ].innerHTML;
+     						 td4.innerHTML = books[ i ].getElementsByTagName("press")[ 0 ].innerHTML;
+
+     						 tr.appendChild(td1);
+     						 tr.appendChild(td2);
+     						 tr.appendChild(td3);
+     						 tr.appendChild(td4);
+
+     						 document.querySelector("table").appendChild(tr);
+     					}
+
+     				}
+     			}
+     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // document.querySelector('input').onclick = function () {
+    // 	var xhr = new XMLHttpRequest();
+    // 		xhr.open("POST","02xml.php");
+    // 		xhr.setRequestHeader("Content-Type","application/x-www-form-urlencode")
+    // 		xhr.send(null);
+    // 		xhr.onreadystatechange = function ( ) {
+    // 			if( xhr.readyState == 4 && xhr.status == 200 ) {
+    // 				var data = xhr.responseXML;
+
+    // 				// console.log(data);
+    // 				var books = data.getElementsByTagName("book");
+
+    // 				for( var i = 0; i < books.length; i++ ) {
+
+    // 					var tr = document.createElement('tr');
+    // 					var td1 = document.createElement('td');
+    // 					var td2 = document.createElement('td');
+    // 					var td3 = document.createElement('td');
+    // 					var td4 = document.createElement('td');
+
+    // 					td1.innerHTML = books[ i ].getElementsByTagName("bookName")[ 0 ].innerHTML;
+    // 					td2.innerHTML = books[ i ].getElementsByTagName("author")[ 0 ].innerHTML;
+    // 					td3.innerHTML = books[ i ].getElementsByTagName("price")[ 0 ].innerHTML;
+    // 					td4.innerHTML = books[ i ].getElementsByTagName("press")[ 0 ].innerHTML;
+
+    // 					tr.appendChild(td1);
+    // 					tr.appendChild(td2);
+    // 					tr.appendChild(td3);
+    // 					tr.appendChild(td4);
+
+    // 					document.querySelector("table").appendChild(tr);
+
+    // 				}
+    // 			}
+    // 		}
+    // }
+
+    </script>
+</html>
