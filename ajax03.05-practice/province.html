@@ -70,7 +70,31 @@
 							};
 
 	  //-----------------------------------------区县部分--------------------------------------------------------------
+                document.querySelector("#cityId").onchange = function () {
 
+                    var cityName = this.value;
+
+                    for( var i = 0; i < obj.length; i++ ) {
+
+                        if( obj[ i ].cityName == cityName ) {
+
+                            areas = obj[ i ].areas;
+
+                            document.getElementById("areaId").innerHTML = '<option selected>请选择区县</option>';
+
+                            for( var j = 0; j < areas.length; j++ ) {
+
+                                var areaName = areas[ i ].areaName;
+
+                                var option = document.createElement('option');
+
+                                option.innerHTML = areaName;
+
+                                document.getElementById('areaId').appendChild(option);
+                            }
+                        }
+                    }
+                }
 
 
     			}
