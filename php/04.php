@@ -1,6 +1,6 @@
 <?php 
 
-    header("Content-Type:text/html;chaset=utf-8");
+    header("Content-Type:text/html;charset=utf-8");
 
     // 数组
     //    1：普通数组
