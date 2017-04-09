@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>xmlHttpRequest发送请求</title>
+</head>
+<body>
+    <input type="button" value="xmlHttpRequest发送请求">
+    <script>
+
+        //绑定事件
+        document.querySelector("input[type=button]").onclick=function(){
+
+            // 1:创建一个XMLHttpRequest对象
+            var xhr = new XMLHttpRequest();
+            // 2:发送请求与服务器建立连接
+            xhr.open("get","ajax.php?desc=hello world");
+            // 3:发送数据给服务端(get请求没有请求体)
+            xhr.send(null);
+            // 4：接收服务端的数据
+            //服务器返回数据了，就会调用这个函数.
+               //这个函数会被调用很多次.
+               //因为服务端的数据不是一下立马全部写过来.
+               //这个时候，服务端在返回数据的时候还会不断的给我们一些状态
+               //0,1,2,3,4
+               //每个状态都有特定的含义
+               //其中4 的这个状态代表服务端的数据已经响应完成了
+               //我现在就要向办法去获取到这个状态
+               //然后对这个状态进行一个判断
+               //如果状态等于4，代表响应完成，我就可以开始处理.
+               xhr.onreadystatechange=function(){
+
+                   if(xhr.readyState==4 && xhr.status==200){
+
+                    //    200表示请求成功
+                    //    通过responsText接收服务端返回的数据
+                    var data = xhr.responseText;
+
+                    alert(data);
+                   }
+               }
+        }
+    </script>
+</body>
+</html>

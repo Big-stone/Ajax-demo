@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+     用户名:<input type="text" id="username" placeholder="请输入用户名">
+            <div></div>
+    <script>
+        document.querySelector("input[type=text]").onblur=function(){
+
+            var username = document.getElementById("username").value;
+            
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("post","userReg.php");
+            //post特殊请求头
+            xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+
+            xhr.send("username="+username);
+            
+            xhr.onreadystatechange=function(){
+                    
+                    if(xhr.readyState==4 && xhr.status==200){
+                        
+                        var data = xhr.responseText;
+                        
+                        document.querySelector("div").innerHTML = data;
+                    }
+                }
+        }
+    </script>
+
+</body>
+</html>

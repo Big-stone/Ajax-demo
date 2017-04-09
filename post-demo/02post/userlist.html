@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="查询用户">
+    <div class="box"></div>
+    <script>
+        document.querySelector("input[type=button]").onclick=function(){
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("post","userlist.php");
+
+            xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+
+            xhr.send(null);
+
+            xhr.onreadystatechange=function(){
+
+                if(xhr.readyState==4 && xhr.status==200){
+                    
+                    var data = xhr.responseText;
+                    // alert(data);
+                    var arr = data.split(",");
+                    // console.log(arr);
+                    var div ="";
+
+                    for(var i = 0; i < arr.length; i++){
+                        
+                        div+="<div>"+arr[i]+"</div>";
+
+                    }
+                    console.log(div);
+                    document.querySelector(".box").innerHTML = div;
+                    
+                }
+            }
+            
+        }
+    </script>
+</body>
+</html>
