@@ -1,0 +1,27 @@
+<?xml version="1.0"  encoding="utf-8"?>
+<users>
+    <user>
+        <username>李雷</username>
+        <age>18</age>
+        <sex>男</sex>
+        <url>2.jpg</url>
+    </user>
+    <user>
+        <username>韩梅梅</username>
+        <age>19</age>
+        <sex>女</sex>
+        <url>2.jpg</url>
+    </user>
+    <user>
+        <username>韩雷</username>
+        <age>20</age>
+        <sex>男</sex>
+        <url>2.jpg</url>
+    </user>
+    <user>
+        <username>李梅梅</username>
+        <age>21</age>
+        <sex>女</sex>
+        <url>2.jpg</url>
+    </user>
+</users>

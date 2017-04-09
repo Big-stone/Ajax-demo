@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+      table {
+        width: 600px;
+        border-collapse: collapse;
+        }
+
+        td {
+            height: 40px;
+            text-align: center;
+            border: 1px solid #CCC;
+        }
+    </style>
+</head>
+<body>
+     <input type="button" value="查询用户">
+     <table>
+         <tr>
+             <td>姓名</td>
+             <td>年龄</td>
+             <td>性别</td>
+             <td>照片</td>
+         </tr>
+     </table>
+     <script>
+         document.querySelector("input[type=button]").onclick=function(){
+                
+                //创建XMLHttpRequest对象
+                var xhr = new XMLHttpRequest();
+
+                    xhr.open("post","user.php");
+                    //post特殊请求头
+                    xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+
+                    xhr.send(null);
+
+                    xhr.onreadystatechange=function(){
+                        
+                        if(xhr.readyState==4 && xhr.status){
+
+                            //接收数据
+                            var data = xhr.responseXML;
+
+                            // console.log(data);
+                            var users = data.getElementsByTagName("user");
+                            // console.log(users);
+
+                            // 遍历获取到的数据
+                            for(var i = 0; i < users.length; i++){
+
+                                var tr=document.createElement("tr");
+                                var td1=document.createElement("td");
+                                var td2=document.createElement("td");
+                                var td3=document.createElement("td");
+                                var td4=document.createElement("td");
+
+                                td1.innerHTML = users[i].getElementsByTagName("username")[0].innerHTML;
+                                td2.innerHTML = users[i].getElementsByTagName("age")[0].innerHTML;
+                                td3.innerHTML = users[i].getElementsByTagName("sex")[0].innerHTML;
+                                // td4.innerHTML = users[i].getElementsByTagName("url")[0].innerHTML;
+
+                                var img = document.createElement("img");
+                                // var src = users[i].getElementsByTagName("url")[0].innerHTML;
+
+
+                                img.setAttribute("src",users[i].getElementsByTagName("url")[0].innerHTML);
+                                td4.appendChild(img);
+
+                                tr.appendChild(td1);
+                                tr.appendChild(td2);
+                                tr.appendChild(td3);
+                                tr.appendChild(td4);
+                                
+                                document.querySelector("table").appendChild(tr);
+
+                            }
+                        }
+                    }
+
+
+         }
+     </script>
+</body>
+</html>

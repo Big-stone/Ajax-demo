@@ -5,8 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>xml的数据交互</title>
+    <style>
+      table {
+        width: 600px;
+        border-collapse: collapse;
+        }
+
+        td {
+            height: 40px;
+            text-align: center;
+            border: 1px solid #CCC;
+        }
+    </style>
 </head>
 <body>
-    
+    <input type="button" value="查询书籍">
+    <table>
+        <tr>
+            <td>书名</td>
+            <td>作者</td>
+            <td>价格</td>
+            <td>出版社</td>
+        </tr>
+    </table>
+
+    <script>
+        
+        document.querySelector("input[type=button]").onclick=function(){
+            var xhr = new XMLHttpRequest();
+                xhr.open("post","books.php");
+                xhr.send(null);
+                xhr.onreadystatechange=function(){
+                    if(xhr.readyState==4 && xhr.status==200){
+
+                        var data = xhr.responseXML;
+                        // console.log(data);
+                        var books = data.getElementsByTagName("book");
+                        // console.log(books);//[book, book, book, book]
+                        // 遍历获取到的数据
+                        for(var i = 0; i < books.length; i++ ){
+
+                            var tr = document.createElement("tr");
+                            var td1 = document.createElement("td");
+                            var td2 = document.createElement("td");
+                            var td3 = document.createElement("td");
+                            var td4 = document.createElement("td");
+
+                            td1.innerHTML = books[i].getElementsByTagName("bookName")[0].innerHTML;
+                            td2.innerHTML = books[i].getElementsByTagName("author")[0].innerHTML;
+                            td3.innerHTML = books[i].getElementsByTagName("price")[0].innerHTML;
+                            td4.innerHTML = books[i].getElementsByTagName("cbs")[0].innerHTML;
+                            
+                            tr.appendChild(td1);
+                            tr.appendChild(td2);
+                            tr.appendChild(td3);
+                            tr.appendChild(td4);
+
+                            document.querySelector("table").appendChild(tr);
+
+                        }
+
+
+
+                        
+
+                    }
+                }
+        }
+    </script>
 </body>
 </html>
