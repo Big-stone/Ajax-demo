@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>省市县三级联动</title>
+</head>
+<body>
+
+    <script>
+            // 1:页面加载完毕后通过ajax去获取数据
+            // 2：获取到数据后解析省份对应的数据
+            // 3：解析到省份对应的数据后，组装成option,放在第一个select里面-provinceId
+            // 4:用户选中省份需要根据省份找到省份下面对应的城市
+            //     4.1当用户点击省份，获取到用户选中的省份
+            //     4.2根据选中的省份从后台返回的数据里面进行查找
+            //     4.3查到相同的省份的数据
+            //     4.4然后再根据省份找到对应的城市
+            //     4.5遍历出来城市创建option往第二个select里面丢cityId
+            // 5：用户选中城市，根据城市找到对应的县
+            // 6：找到县组装成option
+            // 7：然后放在第三个select中areaId
+        
+    window.onload = function(){
+        
+    }
+
+
+    </script>
+
+    <select id="provinceId">
+        <option selected>请选择省份</option>
+    </select>
+    <select id="cityId">
+        <option selected>请选择城市</option>
+    </select>
+    <select id="areaId">
+        <option selected>请选择区县</option>
+    </select>
+</body>
+</html>

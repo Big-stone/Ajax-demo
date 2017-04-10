@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="json格式数据解析" id="buttonId">
+    <div class="box"></div>
+
+    <script>
+        document.querySelector("#buttonId").onclick=function(){
+
+            var xhr = new XMLHttpRequest();
+
+                xhr.open("get","01json.php");
+
+                xhr.send(null);
+
+                xhr.onreadystatechange=function(){
+
+                    if(xhr.readyState==4 && xhr.status){
+                         
+                         var data  = xhr.responseText;
+
+                        //  alert(data);
+                        // javascript 给我们提供了两种方式的api,
+                        //将json 格式的字符串转换成JavaScript 的对象
+
+                        // 第一种eval();
+                        // 使用这个方法有一个要求，拿括号把json 字符串包起来.
+                        // ({"name":"李雷"})
+                        // var obj = eval("("+data+")");
+
+                        // console.log(obj);
+
+                        // 第二种方式
+                        // JSON.parse();
+
+                        var obj = JSON.parse(data);
+                        console.log(obj.name);//Object {name: "李雷"}
+
+                        var div = document.createElement("div");
+
+                        div.innerHTML = obj.name;
+
+                        document.querySelector(".box").appendChild(div);
+                        
+                        
+                    }
+
+                }
+        }
+    </script>
+</body>
+</html>
