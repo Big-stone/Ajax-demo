@@ -21,9 +21,85 @@
             // 5：用户选中城市，根据城市找到对应的县
             // 6：找到县组装成option
             // 7：然后放在第三个select中areaId
-        
     window.onload = function(){
-        
+        var obj;
+        var cities;
+        var provinceName;
+        var xhr = new XMLHttpRequest();
+            xhr.open("get","province.php");
+            xhr.send(null);
+            xhr.onreadystatechange=function(){
+                if(xhr.readyState==4 && xhr.status==200){
+                    // 获取数据
+                    var data = xhr.responseText;
+                    // console.log(data);
+                    //    将json数据转换成dom对象
+                        obj = JSON.parse(data);
+                    //    console.log(obj);
+                        // console.log(provinceName);
+                        // 遍历对象
+                        for(var k in obj.p){
+                            // 获取到城市的每一项
+                        provinceName = obj.p[k];
+                            // console.log(provinceName);
+                            for(var v in provinceName){
+                                // console.log(provinceName[v]);
+                        //将遍历后的数据动态添加到option中
+                        var option = document.createElement('option');
+                            option.innerHTML = provinceName[v];
+                        document.getElementById("provinceId").appendChild(option);
+                            }
+
+                        }
+
+    //    要给省份的select添加onchange事件，下拉框发生改变的时候触发
+        document.querySelector("#provinceId").onchange=function(){
+
+                var current = this.value;
+                // console.log(current);
+                
+                for(var k in obj.c){
+                    if(current==provinceName[k]){
+                        // console.log(cities[k]);
+                document.getElementById("cityId").innerHTML='<option selected>请选择城市</option>';
+                document.getElementById("areaId").innerHTML='<option selected>请选择区县</option>';
+                        cities = obj.c[k];
+                        for(var v in cities){
+                        var option = document.createElement('option');
+                            option.innerHTML = cities[v];
+                document.getElementById("cityId").appendChild(option);
+                        }
+                    }
+                }
+
+            
+        }
+
+        // 区县
+        document.querySelector("#cityId").onchange=function(){
+
+                var current = this.value;
+                // console.log(current);
+                // console.log(obj.d);
+                
+                for(var k in obj.d){
+                    if(current==cities[k]){
+                        console.log(obj.d[k]);
+                        area = obj.d[k];
+                        for(var v in area){
+                        var option = document.createElement('option');
+                            option.innerHTML = area[v];
+                document.getElementById("areaId").appendChild(option);
+                        }
+                    }
+                }
+
+            
+        }
+
+
+                }
+            }
     }
 
 
