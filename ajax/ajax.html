@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ajax 封装</title>
+</head>
+<body>
+    <script>
+        
+            // 发送请求,接收数据
+            // 这个方法，支持get方式提交，也支持post提交
+
+            function ajax(obj){
+
+                var xhr = new XMLHttpRequest();
+
+                //get方式提交
+                // 1：请求的参数在地址后边
+                // 2：发送的数据是null
+                if(obj.type.toLocaleLowerCase()=="get"){
+
+                    obj.url = obj.url+"?"+obj.data;
+
+                    obj.data=null;
+                }
+                xhr.open(obj.type,obj.url);
+
+                // 如果是post提交
+                if(obj.type.toLocaleLowerCase()=="post"){
+                    //特殊的请求头
+                    xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+                }
+                xhr.send(obj.data);
+
+                //接收到数据然后把数据响应到客户端
+                xhr.onreadystatechange=function(){
+                    //响应成功
+                    if(xhr.readyState==4 && xhr.status==200){
+                        var data = xhr.responseText;
+
+                        //响应完数据后把数据传给回调函数
+                        obj.success(data);
+                    }
+                }
+
+            }
+        
+        ajax({
+            url:"ajax.php",
+            type:"get",
+            data:"name=李雷&age=14",
+            //通过传递一个回调函数
+            success:function(info){
+                console.log(info);
+            }
+        })
+    </script>
+</body>
+</html>
