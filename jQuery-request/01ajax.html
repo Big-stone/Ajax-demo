@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jQuery 的ajax</title>
+
+    <script src="jquery-1.12.4.js"></script>
+</head>
+<body>
+    <input type="button" value="jQuery 的ajax">
+
+    <script>
+        $("input[type=button]").on("click",function(){
+            
+            //使用jquery的API发送请求
+            $.ajax({
+                //地址
+                url:"01ajax.php",
+                //提交方式
+                type:"post",
+                // 发送到服务器的数据有两种格式
+                // 第一种
+                // data:"age=18",
+                // 第二种
+                data:{
+                    age:18,
+                    name:"李雷"
+                },
+                //请求发送之前调用的函数
+                beforeSend:function(){
+                /**
+                 * 一般发送请求到服务器，需要发送一些参数
+                 * 为了减少与服务器的交互一般都会对发送到服务端的数据进行校验
+                 * 如果校验不通过,我就给用户一些提示，就不发送请求了
+                 * beforesend是$.ajax()底层去调用
+                */
+            },
+            // 请求的超时时间
+            // timeout:3000,
+            //数据返回成功之后的回调函数.
+            success:function(data){
+                alert("请求响应成功的时候调用");
+            },
+            //出错的时候调用的函数
+            //可在此函数里给客户提示信息
+            error:function(){
+                alert("请求出错的时候调用");
+            },
+            //请求结束之后调用的函数.
+            //这个函数不管成功或失败都会调用
+            complete:function(){
+                alert("请求结束之后调用");
+            }
+            
+            })
+        })
+    </script>
+</body>
+</html>
