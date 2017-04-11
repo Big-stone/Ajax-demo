@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!--使用jQuery 发送ajax 请求-->
+    <script src="jquery.min.js"></script>
+    <!--使用模板去解析 native 原生 -->
+    <script src="template-native.js"></script>
+
+    <style>
+        table {
+            width: 600px;
+            border-collapse: collapse;
+        }
+        td {
+            height: 40px;
+            text-align: center;
+            border: 1px solid #CCC;
+        }
+    </style>
+    <!--
+       1: 定义模板
+       2：准备模板里面的内容 跟写到页面上面的内容有关系.
+       3：在这里解析数据.
+       4: template-native.js 提供了原生的语法去解析
+          <%  %>  ->  在模板里面写逻辑
+          <%= %>  ->  在模板里面输出
+    -->
+<script type="text/template" id="templateId">
+    <% for(var i=0;i<rows.length;i++){ %>
+        <tr>
+            <td><%=rows[i].username%></td>
+            <td><%=rows[i].age%></td>
+            <td><%=rows[i].sex%></td>
+            <td><%=rows[i].desc%></td>
+            <td>
+                <input type="button" value="<%=rows[i].operation%>">
+            </td>
+        </tr>
+    <% } %>
+</script>
+
+</head>
+<body>
+<input type="button" value="ajax 获取数据，模板解析" id="buttonId">
+    <table>
+        <tr>
+            <td>用户名</td>
+            <td>年龄</td>
+            <td>性别</td>
+            <td>描述</td>
+            <td>操作</td>
+        </tr>
+    </table>
+
+<script>
+    $(function(){
+        
+        $("#buttonId").on("click",function(){
+            $.ajax({
+                url:"template.php",
+                type:"get",
+                success:function(data){
+                    //使用模板去解析数据
+                    //template 方法是template-native.js 提供的
+                    //将模板跟数据进行绑定，在模板里面解析数据.
+                    //传进去的数据必须是一个对象。{}
+                    // alert(data);
+                    //这是一个数组
+
+                    //转换成dom对象
+                    var arr = JSON.parse(data);
+
+                    //将数组包在对象里面
+                    var obj = {
+                        rows:arr
+                    }
+                    // console.log(obj);
+                    //模板跟数据绑定在一起，解析之后，会返回一个字符串
+                    //只需要将这个字符串放在页面上面即可
+
+                    var html=template("templateId",obj);
+                    console.log(html);
+                    //将数据填充到模板里面
+                    $("table").append(html);
+
+                }
+            })
+        })
+    })
+</script>
+</body>
+</html>
