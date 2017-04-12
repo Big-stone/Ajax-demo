@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>查询天气</title>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/template-native.js"></script>
+    <script type="text/template" id="weatherId">
+        <%for(var i=0; i<results[0].weather_data.length;i++) {%>
+            <tr>
+                <td>
+                    <%=results[0].weather_data[i].date%>
+                </td>
+                <td>
+                    <img src="<%=results[0].weather_data[i].dayPictureUrl%>">
+                </td>
+                <td>
+                    <img src="<%=results[0].weather_data[i].nightPictureUrl%>">
+                </td>
+                <td>
+                    <%=results[0].weather_data[i].temperature%>
+                </td>
+                <td>
+                    <%=results[0].weather_data[i].weather%>
+                </td>
+                <td>
+                    <%=results[0].weather_data[i].wind%>
+                </td>
+            </tr>
+        <% } %>
+    </script>
+</head>
+<body>
+    <input type="text" id="city">
+    <input type="button" value="查询天气">
+    <table>
+
+    </table>
+    <script>
+        $("input[type=button]").on("click",function(){
+            var cityName = $("#city").val();
+
+            //百度天气接口
+            $.ajax({
+                url:"http://api.map.baidu.com/telematics/v3/weather?ak=6tYzTvGZSOpYB5Oc2YGGOKt8&location="+cityName+"&output=json",
+                type:"get",
+                dataType:"jsonp",
+                success:function(data){
+                    console.log(data);
+                    // 将数据跟模板进行绑定
+                    var html = template("weatherId",data);
+                    // console.log(html);
+                    $("table").append(html);
+                }
+            })
+        })
+    </script>
+</body>
+</html>
