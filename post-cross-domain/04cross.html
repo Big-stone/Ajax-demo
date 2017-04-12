@@ -4,9 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>script标签发送请求,然后使用js接收返回的数据</title>
 </head>
 <body>
     
+    <input type="button" value="script标签发送请求,接收数据">
+
+    <script>
+        function getInfo(obj){
+            alert("调用");
+            console.log(obj);
+            // 解析数据,放到页面上
+        }
+
+        // getInfo({"username":"hanmeimei"})返回的是这个数据
+        // js去解析,调用这个函数，就会在script标签里面找到这个函数，没有找到就是未定义
+        
+        document.querySelector("input").onclick=function(){
+
+            var script = document.createElement("script");
+
+            script.src = "04cross.php?callback=getInfo";
+            document.body.appendChild(script);
+            // 通过js去接收数据
+        }
+    </script>
 </body>
 </html>
