@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>使用script标签发送请求</title>
+</head>
+<body>
+    <input type="button" value="script发送请求">
+
+    <script>
+        document.querySelector("input").onclick=function(){
+
+            var script = document.createElement("script");
+            script.src = "http://api.map.baidu.com/telematics/v3/weather?ak=6tYzTvGZSOpYB5Oc2YGGOKt8&location=天津&output=json";
+
+            //把标签挂在到页面上
+            //获取到这个数据并解析放到页面上
+            document.body.appendChild(script);
+            
+            // 因为现在是使用script标签去发送请求,服务端返回的数据浏览器直接以js的方式去解析这个数据。
+        }
+    </script>
+</body>
+</html>

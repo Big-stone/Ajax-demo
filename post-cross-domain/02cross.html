@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jsonp原理解析</title>
+</head>
+<body>
+       <!--默认都是get 请求.-->
+    <script src="02cross.php?username=李雷"></script>
+    <!--
+在页面上面通过js 发送请求，我是使用 XMLHttpRequest 来发送的，但是这个对象，不支持跨域处理
+在页面上面还能够通过别的方式去发送请求.
+还有标签。标签页是可以发送请求的。
+script 标签可以发送， src
+link 标签 也可以发送请求.
+    -->
+    <!--
+        script 都是去引入一个js文件.
+        它可以去访问php，跟地址的后缀没有任何关系，跟访问到的这个
+     资源返回的数据有关系.
+        因为现在是使用script 标签发送请求，服务器返回
+了数据，浏览器得到数据，它会按照js 的方式去解析李雷.
+     所以报错了。
+     script 标签发送的地址后面还能携带参数。
+     这个script 标签支持跨域.
+    -->
+
+</body>
+</html>
